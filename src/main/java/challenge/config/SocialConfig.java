@@ -1,9 +1,6 @@
 package challenge.config;
 
-import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.github.connect.GitHubConnectionFactory;
-import org.springframework.social.google.connect.GoogleConnectionFactory;
-import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 import challenge.dao.UsersDao;
 import challenge.services.AccountConnectionSignUpService;
@@ -35,17 +32,17 @@ public class SocialConfig implements SocialConfigurer {
 
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer connectionFactoryConfigurer, Environment environment) {
-        connectionFactoryConfigurer.addConnectionFactory(new FacebookConnectionFactory(
-                environment.getProperty("spring.social.facebook.appId"),
-                environment.getProperty("spring.social.facebook.appSecret")));
+        //  connectionFactoryConfigurer.addConnectionFactory(new FacebookConnectionFactory(
+        //        environment.getProperty("spring.social.facebook.appId"),
+        //      environment.getProperty("spring.social.facebook.appSecret")));
         connectionFactoryConfigurer.addConnectionFactory(new TwitterConnectionFactory(
                 environment.getProperty("twitter.consumerKey"),
                 environment.getProperty("twitter.consumerSecret")));
         connectionFactoryConfigurer.addConnectionFactory(new GitHubConnectionFactory(
                 environment.getProperty("spring.social.github.appId"),
                 environment.getProperty("spring.social.github.appSecret")));
-         connectionFactoryConfigurer.addConnectionFactory(new VKontakteConnectionFactory(
-                environment.getProperty("vkontakte.appKey"), 
+        connectionFactoryConfigurer.addConnectionFactory(new VKontakteConnectionFactory(
+                environment.getProperty("vkontakte.appKey"),
                 environment.getProperty("vkontakte.appSecret")));
 
     }
@@ -54,6 +51,7 @@ public class SocialConfig implements SocialConfigurer {
     public UserIdSource getUserIdSource() {
         return new AuthenticationNameUserIdSource();
     }
+    
 
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {

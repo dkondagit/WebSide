@@ -104,6 +104,7 @@ public class SocialControllerUtil {
         model.addAttribute("currentUserDisplayName", displayName);
         model.addAttribute("currentData", data);
         model.addAttribute("mainChallenge", chalsDao.getMainChallenge());
+        model.addAttribute("Challenges", chalsDao.getChallenges());
 
     }
 

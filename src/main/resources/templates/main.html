@@ -5,7 +5,7 @@
     <head>
         <title>Main</title>
 
-        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
@@ -67,6 +67,25 @@
                             </div> 
                         </div>
 
+                    </div>
+                    <div th:each="challenge : ${Challenges}" >
+                        <div  class="challenge col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div style="border-width: 5" class="panel panel-default">
+                                <div class="box-content panel-body ">
+                                    <div class="chal-photo-main-page"> 
+                                        <img class="img-rounded" th:src="${challenge.getImageURL()}" alt=""/> 
+                                    </div>
+                                    <div class="chal-body">
+                                        <form name="submitForm" th:id="'challenge_form'+${challenge.Id}"  method="GET" action="information">
+                                            <input type="hidden" name="id" th:value="${challenge.getId()}"/>
+                                            <h2 class="chal-title"><a  th:onclick="'document.getElementById(\'challenge_form'+${challenge.getId()}+'\').submit();'" th:text="${challenge.getTitle()}"></a></h2>
+                                        </form>
+                                        <span class="chal-meta" th:text="${challenge.getDate()}"></span>
+                                        <h4 class="desc" th:text="${challenge.getShortDescription()}"></h4>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
                     </div>
                 </div>
             </div>

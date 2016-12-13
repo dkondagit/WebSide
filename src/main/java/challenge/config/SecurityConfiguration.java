@@ -23,34 +23,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.
-            jdbcAuthentication()
-            .dataSource(dataSource)
-            .withDefaultSchema();
+                jdbcAuthentication()
+                .dataSource(dataSource)
+                .withDefaultSchema();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http
-            .formLogin()
+                .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login/authenticate")
                 .failureUrl("/login?param.error=bad_credentials")
                 .permitAll()
-        .and()
-            .logout()
+                .and()
+                .logout()
                 .logoutUrl("/logout")
                 .deleteCookies("JSESSIONID")
-        .and()
-            .authorizeRequests()
-                .antMatchers("/favicon.ico", "/static-resources/**","/").permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/favicon.ico", "/static-resources/**", "/","main1").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
-            .rememberMe()
-        .and()
-            .apply(new SpringSocialConfigurer()
-                .postLoginUrl("/")
-                .alwaysUsePostLoginUrl(true));
+                .rememberMe()
+                .and()
+                .apply(new SpringSocialConfigurer()
+                        .postLoginUrl("/")
+                        .alwaysUsePostLoginUrl(true));
     }
 
     @Bean
